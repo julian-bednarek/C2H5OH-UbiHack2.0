@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 30% 5%;
+    --foreground: 0 0% 100%;
+    --card: 220 25% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 25% 10%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 280 100% 70%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 180 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 320 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 25% 20%;
+    --input: 220 25% 15%;
+    --ring: 280 100% 70%;
+    --radius: 1rem;
+    
+    --gradient-fire: linear-gradient(135deg, #ff0080 0%, #ff8c00 50%, #40e0d0 100%);
+    --gradient-cyber: linear-gradient(135deg, #0ff 0%, #f0f 50%, #ff0 100%);
+    --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #d946ef 50%, #ec4899 100%);
+    --gradient-neon: linear-gradient(135deg, #00f5ff 0%, #ff00ff 50%, #ffff00 100%);
+    --shadow-neon: 0 0 60px rgba(139, 92, 246, 0.6), 0 0 100px rgba(217, 70, 239, 0.4);
+    --shadow-cyan: 0 0 60px rgba(0, 245, 255, 0.6), 0 0 100px rgba(0, 245, 255, 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  }
+  
+  /* Focus indicators for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+  
+  /* Skip to main content link */
+  .skip-link {
+    @apply absolute -translate-y-full focus:translate-y-0 bg-primary text-primary-foreground px-4 py-2 rounded-md z-[100] left-4 top-4 transition-transform;
+  }
+  
+  /* Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
+  /* Focus visible for keyboard navigation */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  [role="button"]:focus-visible {
+    @apply outline-offset-4;
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .glass, .glass-strong {
+      @apply bg-background border-2;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10;
+  }
+  
+  .glass-strong {
+    @apply backdrop-blur-2xl bg-white/10 border border-white/20;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-fire);
+  }
+  
+  .text-gradient-cyber {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-cyber);
+  }
+  
+  .neon-border {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5), inset 0 0 20px rgba(139, 92, 246, 0.2);
+  }
+  
+  .neon-text {
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(217, 70, 239, 0.6), 0 0 30px rgba(236, 72, 153, 0.4);
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4), 0 0 30px rgba(217, 70, 239, 0.3);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.8), 0 0 40px rgba(217, 70, 239, 0.6), 0 0 50px rgba(236, 72, 153, 0.4);
+  }
+}
