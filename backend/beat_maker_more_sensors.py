@@ -367,6 +367,9 @@ def generate_wrist_song_structure(bvp_rate, eda, temp, acc, bvp_sampling_rate, e
 
 # --- 4. Main ---
 def main():
+    import sys
+    if len(sys.argv) > 1:
+        INPUT_FILE = sys.argv[1]
     print(f"Starting up... attempting to load {INPUT_FILE}")
     if not os.path.exists(INPUT_FILE):
         print(f"❌ Error: File not found at {os.path.abspath(INPUT_FILE)}")
